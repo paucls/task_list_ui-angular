@@ -1,4 +1,7 @@
 # Task List UI - Angular2
+A Tasks List SPA for a [Task List REST API service](https://github.com/paucls/task_list_api-spring_boot).
+
+[![Build Status](https://travis-ci.org/paucls/task_list_ui-angular2.svg?branch=master)](https://travis-ci.org/paucls/task_list_ui-angular2)
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.20-4.
 
