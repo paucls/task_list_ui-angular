@@ -1,4 +1,7 @@
 # Task List UI - Angular2
+A Tasks List SPA for a [Task List REST API service](https://github.com/paucls/task_list_api-spring_boot).
+
+[![Build Status](https://travis-ci.org/paucls/task_list_ui-angular2.svg?branch=master)](https://travis-ci.org/paucls/task_list_ui-angular2)
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.20-4.
 
@@ -35,4 +38,10 @@ https://paucls-task-list-api.herokuapp.com/
 
 ## Documentation
 Links to some of the articles and documentation used to implement this project:
+
+Deploy to Heroku
 - https://github.com/angular/angular-cli/issues/2517
+
+Setup Travis CI
+- http://blog.500tech.com/setting-up-travis-ci-to-run-tests-on-latest-google-chrome-version/
+- http://mseemann.io/frontend/2016/05/31/setup-angular-2-app-part-1.html
