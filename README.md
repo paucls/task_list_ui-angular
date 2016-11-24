@@ -35,4 +35,10 @@ https://paucls-task-list-api.herokuapp.com/
 
 ## Documentation
 Links to some of the articles and documentation used to implement this project:
+
+Deploy to Heroku
 - https://github.com/angular/angular-cli/issues/2517
+
+Setup Travis CI
+- http://blog.500tech.com/setting-up-travis-ci-to-run-tests-on-latest-google-chrome-version/
+- http://mseemann.io/frontend/2016/05/31/setup-angular-2-app-part-1.html
