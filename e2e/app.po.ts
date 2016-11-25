@@ -5,7 +5,7 @@ export class TaskListUiAngular2Page {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  getNavbarBrand() {
+    return element(by.css('.navbar-brand')).getText();
   }
 }
