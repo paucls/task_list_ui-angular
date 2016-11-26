@@ -13,7 +13,7 @@ export class TasksService {
 
   constructor() { }
 
-  getTasks(): [any] {
+  getTasks() {
     return this.tasks;
   }
 
