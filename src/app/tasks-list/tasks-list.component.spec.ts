@@ -2,6 +2,7 @@
 import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import {Http} from '@angular/http';
 
 import { TasksListComponent } from './tasks-list.component';
 import { TasksService } from './tasks.service';
@@ -21,7 +22,10 @@ describe('TasksListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [TasksListComponent],
-      providers: [TasksService]
+      providers: [
+        TasksService,
+        { provide: Http, useClass: class HttpStub{} }
+      ]
     })
     .compileComponents();
   }));

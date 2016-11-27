@@ -1,20 +1,19 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {Http} from '@angular/http';
+
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class TasksService {
 
-  tasks: [any] = [
-    {id: 'task-1', name: 'Buy milk', done: false, userId: 'user-1'},
-    {id: 'task-2', name: 'Pay rent', done: true, userId: 'user-1'},
-    {id: 'task-3', name: 'Return book', done: false, userId: 'user-1'},
-    {id: 'task-4', name: 'Clean car', done: true, userId: 'user-1'},
-    {id: 'task-5', name: 'Go running', done: true, userId: 'user-1'}
-  ];
+  private tasksUrl = 'http://paucls-task-list-api.herokuapp.com/tasks';
 
-  constructor() { }
-
-  getTasks() {
-    return Promise.resolve(this.tasks);
+  constructor(private http: Http) {
   }
 
+  getTasks(): Promise<any[]> {
+    return this.http.get(this.tasksUrl)
+      .toPromise()
+      .then(response => response.json() as any[]);
+  }
 }
