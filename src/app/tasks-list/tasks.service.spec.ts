@@ -1,20 +1,19 @@
-import { TestBed, async, inject } from '@angular/core/testing';
-import { TasksService } from './tasks.service';
+import {TasksService} from './tasks.service';
 
 describe('TasksService', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [TasksService]
-    });
-  });
+
+  let tasksService: TasksService;
+
+  beforeEach(() => tasksService = new TasksService());
 
   describe('getTasks()', () => {
 
-    it('should return all tasks', inject([TasksService], (service: TasksService) => {
-      let tasks = service.getTasks();
-
-      expect(tasks.length).toBe(5);
-    }));
+    it('should return all tasks', done => {
+      tasksService.getTasks().then(tasks => {
+        expect(tasks.length).toBe(5);
+        done();
+      })
+    });
 
   });
 

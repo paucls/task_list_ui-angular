@@ -14,7 +14,7 @@ export class TasksService {
   constructor() { }
 
   getTasks() {
-    return this.tasks;
+    return Promise.resolve(this.tasks);
   }
 
 }
