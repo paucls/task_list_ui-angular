@@ -4,8 +4,8 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
-    "preinstall": "npm install -g http-server",
-    "postinstall": "ng build --prod",
+    "heroku-prebuild": "npm install -g http-server",
+    "heroku-postbuild": "ng build --prod",
     "start": "http-server dist/",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test --watch false",
