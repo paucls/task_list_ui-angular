@@ -7,6 +7,7 @@ import { Http } from '@angular/http';
 import { TasksListComponent } from './tasks-list.component';
 import { TasksService } from './tasks.service';
 import { Task } from './task';
+import { TaskDetailComponent } from './task-detail/task-detail.component';
 
 describe('TasksListComponent', () => {
 
@@ -17,13 +18,16 @@ describe('TasksListComponent', () => {
 
   let component: TasksListComponent;
   let fixture: ComponentFixture<TasksListComponent>;
-  let de: DebugElement;
-  let el: HTMLElement;
+  let taskListDe: DebugElement;
+  let taskListEl: HTMLElement;
   let tasksService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TasksListComponent],
+      declarations: [
+        TasksListComponent,
+        TaskDetailComponent
+      ],
       providers: [
         TasksService,
         {provide: Http, useClass: class HttpStub {}}
@@ -42,14 +46,8 @@ describe('TasksListComponent', () => {
     spyOn(tasksService, 'getTasks').and.returnValue(Promise.resolve(TASKS));
 
     // query for the list-group by CSS element selector
-    de = fixture.debugElement.query(By.css('div.list-group'));
-    el = de.nativeElement;
-  });
-
-  it('should create', () => {
-    fixture.detectChanges();
-
-    expect(component).toBeTruthy();
+    taskListDe = fixture.debugElement.query(By.css('div.list-group'));
+    taskListEl = taskListDe.nativeElement;
   });
 
   it('should display the list of tasks', fakeAsync(() => {
@@ -57,11 +55,11 @@ describe('TasksListComponent', () => {
     tick(); // wait for async getTasks
     fixture.detectChanges(); // update view with tasks
 
-    let deItems = de.queryAll(By.css('.list-group-item'));
+    let taskDetailDe = taskListDe.queryAll(By.css('app-task-detail'));
     expect(tasksService.getTasks).toHaveBeenCalled();
-    expect(deItems.length).toBe(TASKS.length);
-    expect(deItems[0].nativeElement.textContent).toContain(TASKS[0].name);
-    expect(deItems[1].nativeElement.textContent).toContain(TASKS[1].name);
+    expect(taskDetailDe.length).toBe(TASKS.length);
+    expect(taskDetailDe[0].nativeElement.textContent).toContain(TASKS[0].name);
+    expect(taskDetailDe[1].nativeElement.textContent).toContain(TASKS[1].name);
   }));
 
 });

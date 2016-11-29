@@ -1,10 +1,10 @@
 /* tslint:disable:no-unused-variable */
-
 import { TestBed, async } from '@angular/core/testing';
 import { Http } from '@angular/http';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TasksListComponent } from './tasks-list/tasks-list.component';
+import { TaskDetailComponent } from './tasks-list/task-detail/task-detail.component';
 
 describe('AppComponent', () => {
   beforeEach(() => {
@@ -12,7 +12,8 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         NavbarComponent,
-        TasksListComponent
+        TasksListComponent,
+        TaskDetailComponent
       ],
       providers: [
         { provide: Http, useClass: class HttpStub{} }

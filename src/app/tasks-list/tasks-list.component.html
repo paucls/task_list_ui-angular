@@ -1,8 +1,3 @@
 <div class="list-group">
-  <a *ngFor="let task of tasks" href="#" class="list-group-item">
-    <span class="badge">
-      <span class="glyphicon glyphicon-ok"></span>
-    </span>
-    {{task.name}}
-  </a>
+  <app-task-detail *ngFor="let task of tasks" [task]="task"></app-task-detail>
 </div>
