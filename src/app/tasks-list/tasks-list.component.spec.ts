@@ -1,14 +1,15 @@
 /* tslint:disable:no-unused-variable */
-import {async, ComponentFixture, TestBed, tick, fakeAsync} from '@angular/core/testing';
-import {By} from '@angular/platform-browser';
-import {DebugElement} from '@angular/core';
-import {Http} from '@angular/http';
+import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
+import { Http } from '@angular/http';
 
-import {TasksListComponent} from './tasks-list.component';
-import {TasksService} from './tasks.service';
-import {Task} from "./task";
+import { TasksListComponent } from './tasks-list.component';
+import { TasksService } from './tasks.service';
+import { Task } from './task';
 
 describe('TasksListComponent', () => {
+
   const TASKS: Task[] = [
     {id: 'task-1', name: 'Buy milk', done: false, userId: 'user-1'},
     {id: 'task-2', name: 'Pay rent', done: true, userId: 'user-1'}
@@ -25,10 +26,9 @@ describe('TasksListComponent', () => {
       declarations: [TasksListComponent],
       providers: [
         TasksService,
-        { provide: Http, useClass: class HttpStub{} }
+        {provide: Http, useClass: class HttpStub {}}
       ]
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
