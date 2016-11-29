@@ -3,10 +3,11 @@ import {BaseRequestOptions, Http, ConnectionBackend, Response, ResponseOptions} 
 import {MockBackend} from '@angular/http/testing';
 
 import {TasksService} from './tasks.service';
+import {Task} from './task';
 
 describe('TasksService', () => {
 
-  const TASKS = [
+  const TASKS: Task[] = [
     {id: 'task-1', name: 'Buy milk', done: false, userId: 'user-1'},
     {id: 'task-2', name: 'Pay rent', done: true, userId: 'user-1'}
   ];
