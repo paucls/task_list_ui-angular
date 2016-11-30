@@ -34,7 +34,7 @@ Run `ng github-pages:deploy` to deploy to Github Pages.
 To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 ## Demo
-https://paucls-task-list-api.herokuapp.com/
+https://paucls-task-list-ui.herokuapp.com/
 
 ## Documentation
 Links to some of the articles and documentation used to implement this project:

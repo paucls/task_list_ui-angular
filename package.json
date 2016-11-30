@@ -6,7 +6,7 @@
   "scripts": {
     "heroku-prebuild": "npm install -g http-server",
     "heroku-postbuild": "ng build --prod",
-    "start": "http-server dist/",
+    "start": "http-server dist/ -P $API_BASE_URL",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test --watch false",
     "pree2e": "webdriver-manager update",
@@ -22,10 +22,14 @@
     "@angular/platform-browser": "~2.1.0",
     "@angular/platform-browser-dynamic": "~2.1.0",
     "@angular/router": "~3.1.0",
+    "bootstrap": "3.3.7",
+    "bootswatch": "3.3.7",
     "core-js": "~2.4.1",
+    "jquery": "3.1.1",
     "rxjs": "5.0.0-beta.12",
     "ts-helpers": "~1.1.1",
     "zone.js": "~0.6.23",
+
     "angular-cli": "1.0.0-beta.20-4",
     "@angular/compiler-cli": "~2.1.0",
     "@types/jasmine": "~2.2.30",
