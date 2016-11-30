@@ -6,7 +6,7 @@
   "scripts": {
     "heroku-prebuild": "npm install -g http-server",
     "heroku-postbuild": "ng build --prod",
-    "start": "http-server dist/",
+    "start": "http-server dist/ -P $API_BASE_URL",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test --watch false",
     "pree2e": "webdriver-manager update",
