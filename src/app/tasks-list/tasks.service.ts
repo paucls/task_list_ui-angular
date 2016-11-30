@@ -7,7 +7,7 @@ import { Task } from './task';
 @Injectable()
 export class TasksService {
 
-  private tasksUrl = 'http://paucls-task-list-api.herokuapp.com/tasks';
+  private tasksUrl = '//paucls-task-list-api.herokuapp.com/tasks';
 
   constructor(private http: Http) {}
 

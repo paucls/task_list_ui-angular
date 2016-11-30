@@ -33,7 +33,7 @@ describe('TasksService', () => {
       let result;
 
       mockBackend.connections.subscribe(c => {
-        expect(c.request.url).toBe('http://paucls-task-list-api.herokuapp.com/tasks');
+        expect(c.request.url).toBe('//paucls-task-list-api.herokuapp.com/tasks');
         let response = new ResponseOptions({body: TASKS});
         c.mockRespond(new Response(response));
       });
