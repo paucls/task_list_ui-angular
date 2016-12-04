@@ -40,8 +40,13 @@ https://paucls-task-list-ui.herokuapp.com/
 Links to some of the articles and documentation used to implement this project:
 
 Deploy to Heroku
+- https://paucls.wordpress.com/2016/11/25/deploy-angular-2-cli-app-to-heroku/
 - https://github.com/angular/angular-cli/issues/2517
 
 Setup Travis CI
 - http://blog.500tech.com/setting-up-travis-ci-to-run-tests-on-latest-google-chrome-version/
 - http://mseemann.io/frontend/2016/05/31/setup-angular-2-app-part-1.html
+
+Unit Tests
+- https://paucls.wordpress.com/2016/11/30/unit-test-http-services-on-angular-2
+- http://gist.asciidoctor.org/?github-mraible%2Fng2-demo%2F%2FREADME.adoc#_testing
