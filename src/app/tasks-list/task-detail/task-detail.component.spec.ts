@@ -70,4 +70,24 @@ describe('TaskDetailComponent', () => {
     expect(isUncheckedIconPresent).toBe(false);
   });
 
+  describe('toggleTaskStatus()', () => {
+
+    it('should set an undone task as done', () => {
+      let task: Task = {name: 'Undone task', done: false};
+
+      component.toggleTaskStatus(task);
+
+      expect(task.done).toBe(true);
+    });
+
+    it('should set a done task as undone', () => {
+      let task: Task = {name: 'Done task', done: true};
+
+      component.toggleTaskStatus(task);
+
+      expect(task.done).toBe(false);
+    });
+
+  });
+
 });

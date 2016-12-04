@@ -15,4 +15,8 @@ export class TaskDetailComponent implements OnInit {
 
   ngOnInit() {}
 
+  toggleTaskStatus(task: Task) {
+    task.done = !task.done;
+  }
+
 }
