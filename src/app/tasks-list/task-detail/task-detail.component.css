@@ -1,0 +1,19 @@
+.task-check {
+  line-height: 1;
+  vertical-align: middle;
+  padding-right: 5px;
+  background: none;
+  font-size: 1.5em;
+}
+
+.task-check:hover {
+  opacity: 0.8;
+}
+
+.task-check .glyphicon-unchecked {
+  color: grey;
+}
+
+.task-check .glyphicon-check {
+  color: #2196f3;
+}

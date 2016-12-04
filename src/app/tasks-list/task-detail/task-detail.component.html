@@ -1,6 +1,7 @@
 <a href="#" class="list-group-item">
-    <span class="badge" *ngIf="task.done">
-      <span class="glyphicon glyphicon-ok"></span>
-    </span>
+  <span class="task-check">
+    <span class="glyphicon"
+          [ngClass]="{'glyphicon-check': task.done, 'glyphicon-unchecked': !task.done}"></span>
+  </span>
   {{task.name}}
 </a>

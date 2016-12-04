@@ -38,20 +38,36 @@ describe('TaskDetailComponent', () => {
     expect(taskDetailEl.textContent).toContain(TASK.name);
   });
 
-  it('should display ok icon when task is done', () => {
+  it('should display check icon when task is done', () => {
     component.task.done = true;
     fixture.detectChanges();
 
-    let isOkIconPresent = taskDetailDe.queryAll(By.css('.badge > .glyphicon-ok')).length > 0;
-    expect(isOkIconPresent).toBe(true);
+    let isCheckIconPresent = taskDetailDe.queryAll(By.css('.task-check > .glyphicon-check')).length > 0;
+    expect(isCheckIconPresent).toBe(true);
   });
 
-  it('should not display ok icon when task is not done', () => {
+  it('should not display check icon when task is not done', () => {
     component.task.done = false;
     fixture.detectChanges();
 
-    let isOkIconPresent = taskDetailDe.queryAll(By.css('.badge > .glyphicon-ok')).length > 0;
+    let isOkIconPresent = taskDetailDe.queryAll(By.css('.task-check > .glyphicon-check')).length > 0;
     expect(isOkIconPresent).toBe(false);
+  });
+
+  it('should display unchecked icon when task is not done', () => {
+    component.task.done = false;
+    fixture.detectChanges();
+
+    let isUncheckedIconPresent = taskDetailDe.queryAll(By.css('.task-check > .glyphicon-unchecked')).length > 0;
+    expect(isUncheckedIconPresent).toBe(true);
+  });
+
+  it('should not display unchecked icon when task is done', () => {
+    component.task.done = true;
+    fixture.detectChanges();
+
+    let isUncheckedIconPresent = taskDetailDe.queryAll(By.css('.task-check > .glyphicon-unchecked')).length > 0;
+    expect(isUncheckedIconPresent).toBe(false);
   });
 
 });
