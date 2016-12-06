@@ -32,10 +32,10 @@ describe('TasksService', () => {
     it('should return all tasks', inject([TasksService, MockBackend], fakeAsync((tasksService: TasksService, mockBackend: MockBackend) => {
       let result;
 
-      mockBackend.connections.subscribe(c => {
-        expect(c.request.url).toBe('/tasks');
-        let response = new ResponseOptions({body: TASKS});
-        c.mockRespond(new Response(response));
+      mockBackend.connections.subscribe(connection => {
+        expect(connection.request.url).toBe('/tasks');
+        let options = new ResponseOptions({body: TASKS});
+        connection.mockRespond(new Response(options));
       });
 
       tasksService.getTasks().then(tasks => {
@@ -44,6 +44,21 @@ describe('TasksService', () => {
       tick();
 
       expect(result.length).toBe(TASKS.length);
+    })));
+
+  });
+
+  describe('updateTask', () => {
+
+    it('should update task', inject([TasksService, MockBackend], fakeAsync((tasksService: TasksService, mockBackend: MockBackend) => {
+      let task = {id: 'task-1', name: 'Buy milk', done: false, userId: 'user-1'};
+
+      mockBackend.connections.subscribe(connection => {
+        expect(connection.request.url).toBe(`/tasks/${task.id}`);
+        connection.mockRespond(new Response(new ResponseOptions()));
+      });
+
+      tasksService.updateTask(task);
     })));
 
   });

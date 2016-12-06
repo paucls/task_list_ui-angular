@@ -1,10 +1,11 @@
-/* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import { Http } from '@angular/http';
 
 import { TaskDetailComponent } from './task-detail.component';
 import { Task } from '../task';
+import { TasksService } from '../tasks.service';
 
 describe('TaskDetailComponent', () => {
 
@@ -14,16 +15,24 @@ describe('TaskDetailComponent', () => {
   let fixture: ComponentFixture<TaskDetailComponent>;
   let taskDetailDe: DebugElement;
   let taskDetailEl: HTMLElement;
+  let tasksService: TasksService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TaskDetailComponent]
+      declarations: [TaskDetailComponent],
+      providers: [
+        TasksService,
+        {provide: Http, useClass: class HttpStub {}}
+      ]
     }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TaskDetailComponent);
     component = fixture.componentInstance;
+
+    // TasksService from the root injector
+    tasksService = fixture.debugElement.injector.get(TasksService);
 
     // query for the list element by CSS element selector
     taskDetailDe = fixture.debugElement.query(By.css('.list-group-item'));
@@ -72,6 +81,10 @@ describe('TaskDetailComponent', () => {
 
   describe('toggleTaskStatus()', () => {
 
+    beforeEach(() => {
+      spyOn(tasksService, 'updateTask').and.returnValue(Promise.resolve());
+    });
+
     it('should set an undone task as done', () => {
       let task: Task = {name: 'Undone task', done: false};
 
@@ -86,6 +99,15 @@ describe('TaskDetailComponent', () => {
       component.toggleTaskStatus(task);
 
       expect(task.done).toBe(false);
+    });
+
+    it('should call the service to update task', () => {
+      let task: Task = {name: 'Task', done: false};
+      let expectedToggledTask: Task = {name: 'Task', done: true};
+
+      component.toggleTaskStatus(task);
+
+      expect(tasksService.updateTask).toHaveBeenCalledWith(expectedToggledTask);
     });
 
   });
