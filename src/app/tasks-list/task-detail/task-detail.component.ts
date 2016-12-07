@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Task } from '../task';
+import { TasksService } from '../tasks.service';
 
 @Component({
   selector: 'app-task-detail',
@@ -10,9 +11,20 @@ import { Task } from '../task';
 export class TaskDetailComponent implements OnInit {
 
   @Input() task: Task;
+  processing: boolean = false;
 
-  constructor() {}
+  constructor(private tasksService: TasksService) {}
 
   ngOnInit() {}
+
+  toggleTaskStatus(task: Task) {
+    this.processing = true;
+
+    task.done = !task.done;
+
+    return this.tasksService
+      .updateTask(task)
+      .then(() => this.processing = false);
+  }
 
 }

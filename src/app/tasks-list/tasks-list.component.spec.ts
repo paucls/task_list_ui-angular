@@ -20,7 +20,7 @@ describe('TasksListComponent', () => {
   let fixture: ComponentFixture<TasksListComponent>;
   let taskListDe: DebugElement;
   let taskListEl: HTMLElement;
-  let tasksService;
+  let tasksService: TasksService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

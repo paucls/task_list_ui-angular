@@ -1,6 +1,11 @@
 <a href="#" class="list-group-item">
-    <span class="badge" *ngIf="task.done">
-      <span class="glyphicon glyphicon-ok"></span>
-    </span>
+  <span class="task-check">
+    <span class="fa fa-spinner fa-spin"
+          *ngIf="processing"></span>
+    <span class="fa"
+          [ngClass]="{'fa-check-square-o': task.done, 'fa-square-o': !task.done}"
+          (click)="toggleTaskStatus(task)"
+          *ngIf="!processing"></span>
+  </span>
   {{task.name}}
 </a>
