@@ -14,7 +14,8 @@ export class TasksService {
   getTasks(): Promise<Task[]> {
     return this.http.get(this.tasksUrl)
       .toPromise()
-      .then(response => response.json() as Task[]);
+      .then(response => response.json() as Task[])
+      .catch(this.handleError);
   }
 
   updateTask(task: Task): Promise<Task> {
@@ -23,7 +24,13 @@ export class TasksService {
     const options = new RequestOptions({headers: headers});
 
     return this.http.post(url, JSON.stringify(task), options)
-      .toPromise();
+      .toPromise()
+      .catch(this.handleError);
+  }
+
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error);
+    return Promise.reject(error.message || error);
   }
 
 }
