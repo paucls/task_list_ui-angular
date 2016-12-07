@@ -51,7 +51,7 @@ describe('TaskDetailComponent', () => {
     component.task.done = true;
     fixture.detectChanges();
 
-    let isCheckIconPresent = taskDetailDe.queryAll(By.css('.task-check > .glyphicon-check')).length > 0;
+    let isCheckIconPresent = taskDetailDe.queryAll(By.css('.task-check > .fa-check-square-o')).length > 0;
     expect(isCheckIconPresent).toBe(true);
   });
 
@@ -59,7 +59,7 @@ describe('TaskDetailComponent', () => {
     component.task.done = false;
     fixture.detectChanges();
 
-    let isOkIconPresent = taskDetailDe.queryAll(By.css('.task-check > .glyphicon-check')).length > 0;
+    let isOkIconPresent = taskDetailDe.queryAll(By.css('.task-check > .fa-check-square-o')).length > 0;
     expect(isOkIconPresent).toBe(false);
   });
 
@@ -67,7 +67,7 @@ describe('TaskDetailComponent', () => {
     component.task.done = false;
     fixture.detectChanges();
 
-    let isUncheckedIconPresent = taskDetailDe.queryAll(By.css('.task-check > .glyphicon-unchecked')).length > 0;
+    let isUncheckedIconPresent = taskDetailDe.queryAll(By.css('.task-check > .fa-square-o')).length > 0;
     expect(isUncheckedIconPresent).toBe(true);
   });
 
@@ -75,7 +75,7 @@ describe('TaskDetailComponent', () => {
     component.task.done = true;
     fixture.detectChanges();
 
-    let isUncheckedIconPresent = taskDetailDe.queryAll(By.css('.task-check > .glyphicon-unchecked')).length > 0;
+    let isUncheckedIconPresent = taskDetailDe.queryAll(By.css('.task-check > .fa-square-o')).length > 0;
     expect(isUncheckedIconPresent).toBe(false);
   });
 
@@ -108,6 +108,16 @@ describe('TaskDetailComponent', () => {
       component.toggleTaskStatus(task);
 
       expect(tasksService.updateTask).toHaveBeenCalledWith(expectedToggledTask);
+    });
+
+    it('should indicate when operation is processing', () => {
+      let task: Task = {name: 'Undone task', done: false};
+
+      expect(component.processing).toBe(false);
+
+      component.toggleTaskStatus(task);
+
+      expect(component.processing).toBe(true);
     });
 
   });

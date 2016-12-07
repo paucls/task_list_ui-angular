@@ -10,10 +10,11 @@
   opacity: 0.8;
 }
 
-.task-check .glyphicon-unchecked {
+.task-check .fa-square-o {
   color: grey;
+  padding-right: 3px;
 }
 
-.task-check .glyphicon-check {
+.task-check .fa-check-square-o {
   color: #2196f3;
 }

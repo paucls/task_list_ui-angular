@@ -11,15 +11,20 @@ import { TasksService } from '../tasks.service';
 export class TaskDetailComponent implements OnInit {
 
   @Input() task: Task;
+  processing: boolean = false;
 
   constructor(private tasksService: TasksService) {}
 
   ngOnInit() {}
 
   toggleTaskStatus(task: Task) {
+    this.processing = true;
+
     task.done = !task.done;
 
-    this.tasksService.updateTask(task);
+    return this.tasksService
+      .updateTask(task)
+      .then(() => this.processing = false);
   }
 
 }
