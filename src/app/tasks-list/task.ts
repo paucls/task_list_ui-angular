@@ -17,5 +17,5 @@ export interface Task {
   /**
    * Indicates if the task is already done or not.
    */
-  done: boolean;
+  done?: boolean;
 }

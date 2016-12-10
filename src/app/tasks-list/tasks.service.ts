@@ -18,6 +18,10 @@ export class TasksService {
       .catch(this.handleError);
   }
 
+  save(task: Task): Promise<void> {
+    return Promise.resolve();
+  }
+
   updateTask(task: Task): Promise<Task> {
     const url = `${this.tasksUrl}/${task.id}`;
     const headers = new Headers({'Content-Type': 'application/json'});

@@ -62,4 +62,27 @@ describe('TasksListComponent', () => {
     expect(taskDetailDe[1].nativeElement.textContent).toContain(TASKS[1].name);
   }));
 
+  describe('addTask()', () => {
+
+    let taskName = 'Task Name';
+
+    it('should call service to save the new task', () => {
+      spyOn(tasksService, 'save').and.returnValue(Promise.resolve());
+
+      component.addTask(taskName);
+
+      expect(tasksService.save).toHaveBeenCalledWith({name: taskName});
+    });
+
+    it('should reload list of tasks', fakeAsync(() => {
+      spyOn(tasksService, 'save').and.returnValue(Promise.resolve());
+
+      component.addTask(taskName);
+
+      tick();
+      expect(tasksService.getTasks).toHaveBeenCalled();
+    }));
+
+  });
+
 });

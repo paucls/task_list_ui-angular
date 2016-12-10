@@ -3,7 +3,8 @@
     <span class="task-form-icon">
       <span class="fa fa-plus"></span>
     </span>
-    <input type="text" placeholder="Add task">
+    <input #name type="text" placeholder="Add task"
+    (keyup.enter)="addTask(name.value); name.value = '';">
   </div>
 
   <app-task-detail *ngFor="let task of tasks" [task]="task"></app-task-detail>
