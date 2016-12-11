@@ -17,6 +17,10 @@ export class TaskDetailComponent implements OnInit {
 
   ngOnInit() {}
 
+  deleteTask(task: Task) {
+    this.tasksService.delete(task.id);
+  }
+
   toggleTaskStatus(task: Task) {
     this.processing = true;
 

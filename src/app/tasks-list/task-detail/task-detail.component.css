@@ -22,3 +22,21 @@
 .task-check .fa-check-square-o {
   color: #2196f3;
 }
+
+.task-delete {
+  display: none;
+  line-height: 1;
+  vertical-align: middle;
+  padding-right: 5px;
+  background: none;
+  font-size: 1.5em;
+}
+
+.task-delete:hover {
+  opacity: 0.8;
+  color: firebrick;
+}
+
+.list-group-item:hover .task-delete {
+  display: block;
+}

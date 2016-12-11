@@ -79,6 +79,18 @@ describe('TaskDetailComponent', () => {
     expect(isUncheckedIconPresent).toBe(false);
   });
 
+  describe('deleteTask()', () => {
+
+    it('should call the service to delete the task', () => {
+      spyOn(tasksService, 'delete').and.returnValue(Promise.resolve());
+
+      component.deleteTask(TASK);
+
+      expect(tasksService.delete).toHaveBeenCalledWith(TASK.id);
+    });
+
+  });
+
   describe('toggleTaskStatus()', () => {
 
     beforeEach(() => {
