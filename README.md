@@ -50,3 +50,6 @@ Setup Travis CI
 Unit Tests
 - https://paucls.wordpress.com/2016/11/30/unit-test-http-services-on-angular-2
 - http://gist.asciidoctor.org/?github-mraible%2Fng2-demo%2F%2FREADME.adoc#_testing
+
+Angular 2 Tutorial
+- https://angular.io/docs/ts/latest/tutorial/toh-pt6.html

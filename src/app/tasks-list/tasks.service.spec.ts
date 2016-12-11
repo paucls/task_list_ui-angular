@@ -10,6 +10,9 @@ describe('TasksService', () => {
   const TASK_1: Task = {id: 'task-1', name: 'Buy milk', done: false, userId: 'user-1'};
   const TASK_2: Task = {id: 'task-2', name: 'Pay rent', done: true, userId: 'user-1'};
   const TASKS: Task[] = [TASK_1, TASK_2];
+  const METHOD_GET = 0;
+  const METHOD_POST = 1;
+  const METHOD_DELETE = 3;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -26,12 +29,27 @@ describe('TasksService', () => {
     });
   });
 
+  describe('delete()', () => {
+
+    it('should call the API to delete the task', inject([TasksService, MockBackend], fakeAsync((tasksService: TasksService, mockBackend: MockBackend) => {
+      mockBackend.connections.subscribe(connection => {
+        expect(connection.request.method).toBe(METHOD_DELETE);
+        expect(connection.request.url).toBe(`/tasks/${TASK_1.id}`);
+        connection.mockRespond(new Response(new ResponseOptions()));
+      });
+
+      tasksService.delete(TASK_1.id);
+    })));
+
+  });
+
   describe('getAll()', () => {
 
     it('should return all tasks from API', inject([TasksService, MockBackend], fakeAsync((tasksService: TasksService, mockBackend: MockBackend) => {
       let result;
 
       mockBackend.connections.subscribe(connection => {
+        expect(connection.request.method).toBe(METHOD_GET);
         expect(connection.request.url).toBe('/tasks');
         let options = new ResponseOptions({body: TASKS});
         connection.mockRespond(new Response(options));
@@ -54,6 +72,7 @@ describe('TasksService', () => {
       let newTask = {name: 'Buy milk'};
 
       mockBackend.connections.subscribe(connection => {
+        expect(connection.request.method).toBe(METHOD_POST);
         expect(connection.request.url).toBe(`/tasks`);
         let options = new ResponseOptions({body: TASK_1});
         connection.mockRespond(new Response(options));
@@ -73,6 +92,7 @@ describe('TasksService', () => {
 
     it('should call the API to update the task', inject([TasksService, MockBackend], fakeAsync((tasksService: TasksService, mockBackend: MockBackend) => {
       mockBackend.connections.subscribe(connection => {
+        expect(connection.request.method).toBe(METHOD_POST);
         expect(connection.request.url).toBe(`/tasks/${TASK_1.id}`);
         connection.mockRespond(new Response(new ResponseOptions()));
       });
