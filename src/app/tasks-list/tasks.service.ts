@@ -18,8 +18,15 @@ export class TasksService {
       .catch(this.handleError);
   }
 
-  save(task: Task): Promise<void> {
-    return Promise.resolve();
+  save(task: Task): Promise<Task> {
+    const url = `${this.tasksUrl}`;
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post(url, JSON.stringify(task), options)
+      .toPromise()
+      .then(response => response.json() as Task)
+      .catch(this.handleError);
   }
 
   updateTask(task: Task): Promise<Task> {
