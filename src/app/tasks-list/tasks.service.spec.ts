@@ -26,9 +26,30 @@ describe('TasksService', () => {
     });
   });
 
+  describe('getAll()', () => {
+
+    it('should return all tasks from API', inject([TasksService, MockBackend], fakeAsync((tasksService: TasksService, mockBackend: MockBackend) => {
+      let result;
+
+      mockBackend.connections.subscribe(connection => {
+        expect(connection.request.url).toBe('/tasks');
+        let options = new ResponseOptions({body: TASKS});
+        connection.mockRespond(new Response(options));
+      });
+
+      tasksService.getAll().then(tasks => {
+        result = tasks;
+      });
+      tick();
+
+      expect(result.length).toBe(TASKS.length);
+    })));
+
+  });
+
   describe('save()', () => {
 
-    it('should call service to save new task', inject([TasksService, MockBackend], fakeAsync((tasksService: TasksService, mockBackend: MockBackend) => {
+    it('should call the API to save the new task', inject([TasksService, MockBackend], fakeAsync((tasksService: TasksService, mockBackend: MockBackend) => {
       let result;
       let newTask = {name: 'Buy milk'};
 
@@ -48,38 +69,15 @@ describe('TasksService', () => {
 
   });
 
-  describe('getTasks()', () => {
+  describe('update()', () => {
 
-    it('should return all tasks', inject([TasksService, MockBackend], fakeAsync((tasksService: TasksService, mockBackend: MockBackend) => {
-      let result;
-
+    it('should call the API to update the task', inject([TasksService, MockBackend], fakeAsync((tasksService: TasksService, mockBackend: MockBackend) => {
       mockBackend.connections.subscribe(connection => {
-        expect(connection.request.url).toBe('/tasks');
-        let options = new ResponseOptions({body: TASKS});
-        connection.mockRespond(new Response(options));
-      });
-
-      tasksService.getTasks().then(tasks => {
-        result = tasks;
-      });
-      tick();
-
-      expect(result.length).toBe(TASKS.length);
-    })));
-
-  });
-
-  describe('updateTask', () => {
-
-    it('should update task', inject([TasksService, MockBackend], fakeAsync((tasksService: TasksService, mockBackend: MockBackend) => {
-      let task = {id: 'task-1', name: 'Buy milk', done: false, userId: 'user-1'};
-
-      mockBackend.connections.subscribe(connection => {
-        expect(connection.request.url).toBe(`/tasks/${task.id}`);
+        expect(connection.request.url).toBe(`/tasks/${TASK_1.id}`);
         connection.mockRespond(new Response(new ResponseOptions()));
       });
 
-      tasksService.updateTask(task);
+      tasksService.update(TASK_1);
     })));
 
   });

@@ -24,12 +24,12 @@ export class TasksListComponent implements OnInit {
 
     return this.tasksService
       .save(newTask)
-      .then(() => this.loadTasks());
+      .then(task => this.tasks.push(task));
   }
 
   private loadTasks() {
     this.tasksService
-      .getTasks()
+      .getAll()
       .then(tasks => this.tasks = tasks);
   }
 

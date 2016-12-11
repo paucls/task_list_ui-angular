@@ -82,7 +82,7 @@ describe('TaskDetailComponent', () => {
   describe('toggleTaskStatus()', () => {
 
     beforeEach(() => {
-      spyOn(tasksService, 'updateTask').and.returnValue(Promise.resolve());
+      spyOn(tasksService, 'update').and.returnValue(Promise.resolve());
     });
 
     it('should set an undone task as done', () => {
@@ -107,7 +107,7 @@ describe('TaskDetailComponent', () => {
 
       component.toggleTaskStatus(task);
 
-      expect(tasksService.updateTask).toHaveBeenCalledWith(expectedToggledTask);
+      expect(tasksService.update).toHaveBeenCalledWith(expectedToggledTask);
     });
 
     it('should indicate when operation is processing', () => {
