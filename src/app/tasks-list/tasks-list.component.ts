@@ -17,8 +17,21 @@ export class TasksListComponent implements OnInit {
 
   ngOnInit() {
     this.tasksService
-      .getTasks()
+      .getAll()
       .then(tasks => this.tasks = tasks);
+  }
+
+  addTask(name: string): Promise<void> {
+    name = name.trim();
+    if (!name) {
+      return;
+    }
+
+    let newTask: Task = {name: name};
+
+    return this.tasksService
+      .save(newTask)
+      .then(task => this.tasks.push(task));
   }
 
 }

@@ -23,7 +23,7 @@ export class TaskDetailComponent implements OnInit {
     task.done = !task.done;
 
     return this.tasksService
-      .updateTask(task)
+      .update(task)
       .then(() => this.processing = false);
   }
 

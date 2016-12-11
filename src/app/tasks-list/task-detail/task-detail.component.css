@@ -1,3 +1,7 @@
+.list-group-item {
+  font-size: 1.1em;
+}
+
 .task-check {
   line-height: 1;
   vertical-align: middle;
