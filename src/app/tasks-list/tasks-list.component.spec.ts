@@ -83,6 +83,14 @@ describe('TasksListComponent', () => {
       expect(component.tasks[0]).toBe(TASK_1);
     }));
 
+    it('should do nothing if task name is blank', () => {
+      spyOn(tasksService, 'save');
+
+      component.addTask(' ');
+
+      expect(tasksService.save).not.toHaveBeenCalled();
+    });
+
   });
 
 });

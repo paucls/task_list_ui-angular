@@ -19,8 +19,13 @@ export class TasksListComponent implements OnInit {
     this.loadTasks();
   }
 
-  addTask(taskName: string): Promise<void> {
-    let newTask: Task = {name: taskName};
+  addTask(name: string): Promise<void> {
+    name = name.trim();
+    if (!name) {
+      return;
+    }
+
+    let newTask: Task = {name: name};
 
     return this.tasksService
       .save(newTask)
