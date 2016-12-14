@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { Http } from '@angular/http';
@@ -81,13 +81,25 @@ describe('TaskDetailComponent', () => {
 
   describe('deleteTask()', () => {
 
-    it('should call the service to delete the task', () => {
+    beforeEach(() => {
       spyOn(tasksService, 'delete').and.returnValue(Promise.resolve());
+    });
 
+    it('should call the service to delete the task', () => {
       component.deleteTask(TASK);
 
       expect(tasksService.delete).toHaveBeenCalledWith(TASK.id);
     });
+
+    it('should raise task deleted event when delete successes', fakeAsync(() => {
+      let deletedTask: Task;
+      component.taskDeleted.subscribe((task: Task) => deletedTask = task);
+
+      component.deleteTask(TASK);
+      tick();
+
+      expect(deletedTask).toBe(TASK);
+    }));
 
   });
 

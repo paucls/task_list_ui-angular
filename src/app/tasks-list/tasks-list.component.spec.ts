@@ -13,7 +13,6 @@ describe('TasksListComponent', () => {
 
   const TASK_1: Task = {id: 'task-1', name: 'Buy milk', done: false, userId: 'user-1'};
   const TASK_2: Task = {id: 'task-2', name: 'Pay rent', done: true, userId: 'user-1'};
-  const TASKS: Task[] = [TASK_1, TASK_2];
 
   let component: TasksListComponent;
   let fixture: ComponentFixture<TasksListComponent>;
@@ -42,7 +41,7 @@ describe('TasksListComponent', () => {
     tasksService = fixture.debugElement.injector.get(TasksService);
 
     // Setup spy on the `getAll` method
-    spyOn(tasksService, 'getAll').and.returnValue(Promise.resolve(TASKS));
+    spyOn(tasksService, 'getAll').and.returnValue(Promise.resolve([TASK_1, TASK_2]));
 
     // query for the list-group by CSS element selector
     taskListDe = fixture.debugElement.query(By.css('div.list-group'));
@@ -56,9 +55,9 @@ describe('TasksListComponent', () => {
 
     let taskDetailDe = taskListDe.queryAll(By.css('app-task-detail'));
     expect(tasksService.getAll).toHaveBeenCalled();
-    expect(taskDetailDe.length).toBe(TASKS.length);
-    expect(taskDetailDe[0].nativeElement.textContent).toContain(TASKS[0].name);
-    expect(taskDetailDe[1].nativeElement.textContent).toContain(TASKS[1].name);
+    expect(taskDetailDe.length).toBe(2);
+    expect(taskDetailDe[0].nativeElement.textContent).toContain(TASK_1.name);
+    expect(taskDetailDe[1].nativeElement.textContent).toContain(TASK_2.name);
   }));
 
   describe('addTask()', () => {
@@ -89,6 +88,18 @@ describe('TasksListComponent', () => {
       component.addTask(' ');
 
       expect(tasksService.save).not.toHaveBeenCalled();
+    });
+
+  });
+
+  describe('deleteTask()', () => {
+
+    it('should remove deleted task from tasks list', () => {
+      component.tasks = [TASK_1, TASK_2];
+
+      component.deleteTask(TASK_1);
+
+      expect(component.tasks.length).toBe(1);
     });
 
   });
