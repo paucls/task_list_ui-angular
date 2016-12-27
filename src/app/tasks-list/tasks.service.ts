@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { Task } from './task';
@@ -7,6 +7,7 @@ import { Task } from './task';
 @Injectable()
 export class TasksService {
 
+  private headers = new Headers({'Content-Type': 'application/json'});
   private tasksUrl = '/tasks';
 
   constructor(private http: Http) {}
@@ -18,12 +19,18 @@ export class TasksService {
       .catch(this.handleError);
   }
 
+  delete(id: string): Promise<void> {
+    const url = `${this.tasksUrl}/${id}`;
+
+    return this.http.delete(url, {headers: this.headers})
+      .toPromise()
+      .catch(this.handleError);
+  }
+
   save(task: Task): Promise<Task> {
     const url = `${this.tasksUrl}`;
-    const headers = new Headers({'Content-Type': 'application/json'});
-    const options = new RequestOptions({headers: headers});
 
-    return this.http.post(url, JSON.stringify(task), options)
+    return this.http.post(url, JSON.stringify(task), {headers: this.headers})
       .toPromise()
       .then(response => response.json() as Task)
       .catch(this.handleError);
@@ -31,10 +38,8 @@ export class TasksService {
 
   update(task: Task): Promise<Task> {
     const url = `${this.tasksUrl}/${task.id}`;
-    const headers = new Headers({'Content-Type': 'application/json'});
-    const options = new RequestOptions({headers: headers});
 
-    return this.http.post(url, JSON.stringify(task), options)
+    return this.http.post(url, JSON.stringify(task), {headers: this.headers})
       .toPromise()
       .catch(this.handleError);
   }

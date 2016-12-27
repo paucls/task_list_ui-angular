@@ -7,5 +7,10 @@
           (click)="toggleTaskStatus(task)"
           *ngIf="!processing"></span>
   </span>
+
   {{task.name}}
+
+  <span class="task-delete pull-right" title="Delete Task" (click)="deleteTask(task)">
+    <span class="fa fa-trash-o pull-right"></span>
+  </span>
 </a>

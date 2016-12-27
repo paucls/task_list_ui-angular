@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Task } from '../task';
 import { TasksService } from '../tasks.service';
@@ -11,11 +11,18 @@ import { TasksService } from '../tasks.service';
 export class TaskDetailComponent implements OnInit {
 
   @Input() task: Task;
+  @Output() taskDeleted = new EventEmitter<Task>();
   processing: boolean = false;
 
   constructor(private tasksService: TasksService) {}
 
   ngOnInit() {}
+
+  deleteTask(task: Task) {
+    this.tasksService
+      .delete(task.id)
+      .then(() => this.taskDeleted.emit(this.task));
+  }
 
   toggleTaskStatus(task: Task) {
     this.processing = true;

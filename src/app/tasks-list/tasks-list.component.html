@@ -7,5 +7,7 @@
     (keyup.enter)="addTask(name.value); name.value = '';">
   </div>
 
-  <app-task-detail *ngFor="let task of tasks" [task]="task"></app-task-detail>
+  <app-task-detail *ngFor="let task of tasks"
+                   [task]="task"
+                   (taskDeleted)="deleteTask($event)"></app-task-detail>
 </div>
