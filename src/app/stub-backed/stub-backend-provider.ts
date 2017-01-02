@@ -1,5 +1,7 @@
-import { Http, BaseRequestOptions, Response, ResponseOptions, RequestMethod } from '@angular/http';
+import { Http, BaseRequestOptions, Response, ResponseOptions, RequestMethod, XHRBackend } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
+
+import { environment } from '../../environments/environment';
 import { Task } from '../tasks-list/task';
 import { logRequest, generateUuid, getUuidFromUrl } from './stub-backend-utils';
 
@@ -8,14 +10,20 @@ import { logRequest, generateUuid, getUuidFromUrl } from './stub-backend-utils';
  */
 export let stubBackendProvider = {
   provide: Http,
-  deps: [MockBackend, BaseRequestOptions],
-  useFactory: (mockBackend: MockBackend, options: BaseRequestOptions) => {
+  deps: [MockBackend, BaseRequestOptions, XHRBackend],
+  useFactory: (mockBackend: MockBackend, options: BaseRequestOptions, realBackend: XHRBackend) => {
+
+    if (!environment.stubBackend) {
+      console.log('Configuring real Http backend...');
+      return new Http(realBackend, options);
+    }
+
+    console.log('Configuring stub Http backend...');
 
     let tasks: Task[] = [
       {id: '9509c8b4-ad34-4378-b49c-c9206dfd7f75', name: 'Buy milk', done: false, userId: 'user-1'},
       {id: '1b35d8f8-9e80-4316-b3e3-135a8f81200f', name: 'Pay rent', done: true, userId: 'user-1'}];
 
-    // configure stub backend
     mockBackend.connections.subscribe((connection: MockConnection) => {
 
       // wrap in timeout to simulate server api call
