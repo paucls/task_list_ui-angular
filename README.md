@@ -52,5 +52,8 @@ Unit Tests
 - http://gist.asciidoctor.org/?github-mraible%2Fng2-demo%2F%2FREADME.adoc#_testing
 - https://angular.io/docs/ts/latest/guide/testing.html#!#component-with-input-output
 
+Stub backend and E2E Tests
+- http://jasonwatmore.com/post/2016/11/24/angular-2-mockbackend-example-for-backendless-development
+
 Angular 2 Tutorial
 - https://angular.io/docs/ts/latest/tutorial/toh-pt6.html
