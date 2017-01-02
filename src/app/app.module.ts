@@ -9,16 +9,16 @@ import { TasksListComponent } from './tasks-list/tasks-list.component';
 import { TaskDetailComponent } from './tasks-list/task-detail/task-detail.component';
 
 @NgModule({
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule
+  ],
   declarations: [
     AppComponent,
     NavbarComponent,
     TasksListComponent,
     TaskDetailComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

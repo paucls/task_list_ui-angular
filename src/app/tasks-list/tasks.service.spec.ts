@@ -18,9 +18,11 @@ describe('TasksService', () => {
     TestBed.configureTestingModule({
       providers: [
         {
-          provide: Http, useFactory: (backend: ConnectionBackend, defaultOptions: BaseRequestOptions) => {
-          return new Http(backend, defaultOptions);
-        }, deps: [MockBackend, BaseRequestOptions]
+          provide: Http,
+          deps: [MockBackend, BaseRequestOptions],
+          useFactory: (backend: ConnectionBackend, defaultOptions: BaseRequestOptions) => {
+            return new Http(backend, defaultOptions);
+          }
         },
         {provide: MockBackend, useClass: MockBackend},
         {provide: BaseRequestOptions, useClass: BaseRequestOptions},
