@@ -29,6 +29,7 @@
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
+        "dev-proxy": "environments/environment.dev-proxy.ts",
         "prod": "environments/environment.prod.ts"
       }
     }
