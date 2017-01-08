@@ -8,4 +8,8 @@ export class TaskListUiAngular2Page {
   getNavbarBrand() {
     return element(by.css('.navbar-brand')).getText();
   }
+
+  getTasks() {
+    return element.all(by.css('app-task-detail'));
+  }
 }

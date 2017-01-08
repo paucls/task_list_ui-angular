@@ -1,14 +1,27 @@
 import { TaskListUiAngular2Page } from './app.po';
 
-describe('task-list-ui-angular2 App', function() {
+describe('Tasks List App', function () {
   let page: TaskListUiAngular2Page;
 
   beforeEach(() => {
     page = new TaskListUiAngular2Page();
+    page.navigateTo();
   });
 
-  it('should display message saying app works', () => {
-    page.navigateTo();
-    expect(page.getNavbarBrand()).toEqual('Tasks List');
+  describe('Navbar', () => {
+
+    it('should display the app name', () => {
+      expect(page.getNavbarBrand()).toEqual('Tasks List');
+    });
+
   });
+
+  describe('Tasks list', function () {
+
+    it('should have 2 visible tasks', function () {
+      expect(page.getTasks().count()).toBe(2);
+    });
+
+  });
+
 });
