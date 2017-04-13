@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http, Headers, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { Task } from './task';
@@ -19,7 +19,7 @@ export class TasksService {
       .catch(this.handleError);
   }
 
-  delete(id: string): Promise<void> {
+  delete(id: string): Promise<Response> {
     const url = `${this.tasksUrl}/${id}`;
 
     return this.http.delete(url, {headers: this.headers})
@@ -36,7 +36,7 @@ export class TasksService {
       .catch(this.handleError);
   }
 
-  update(task: Task): Promise<Task> {
+  update(task: Task): Promise<Response> {
     const url = `${this.tasksUrl}/${task.id}`;
 
     return this.http.post(url, JSON.stringify(task), {headers: this.headers})

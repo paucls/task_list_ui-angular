@@ -21,7 +21,7 @@ export class TasksListComponent implements OnInit {
       .then(tasks => this.tasks = tasks);
   }
 
-  addTask(name: string): Promise<void> {
+  addTask(name: string): Promise<number> {
     name = name.trim();
     if (!name) {
       return;
