@@ -5,7 +5,7 @@
   "angular-cli": {},
   "scripts": {
     "heroku-prebuild": "npm install -g http-server",
-    "heroku-postbuild": "ng build --prod",
+    "heroku-postbuild": "ng build --prod --aot false",
     "start": "http-server dist/ -P $API_BASE_URL",
     "start:dev": "ng serve",
     "start:dev-proxy": "ng serve --environment=dev-proxy --proxy-config proxy.conf.json",
