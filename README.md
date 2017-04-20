@@ -27,6 +27,10 @@ Before running the tests make sure you are serving the app via `ng serve`.
 ## Demo
 https://paucls-task-list-ui.herokuapp.com/
 
+## Version History
+- 0.0.0 - Implemented completely the project, used Angular 2 and Angular CLI 1.0.0-beta.20-4.
+- 1.0.0 - Updated Angular to version 4.0.0 as part of updating to Angular CLI 1.0.0. (As drawback this versions disables aot on production build, this is related to bug with Angular 4 and MockService https://github.com/angular/angular/issues/15521).
+
 ## Documentation
 Links to some of the articles and documentation used to implement this project:
 
