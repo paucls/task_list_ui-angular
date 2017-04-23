@@ -8,15 +8,13 @@ import { TasksService } from '../tasks.service';
   templateUrl: './task-detail.component.html',
   styleUrls: ['./task-detail.component.css']
 })
-export class TaskDetailComponent implements OnInit {
+export class TaskDetailComponent {
 
   @Input() task: Task;
   @Output() taskDeleted = new EventEmitter<Task>();
   processing: boolean = false;
 
   constructor(private tasksService: TasksService) {}
-
-  ngOnInit() {}
 
   deleteTask(task: Task) {
     this.tasksService
