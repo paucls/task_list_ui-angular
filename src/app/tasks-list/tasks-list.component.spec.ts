@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 import { TasksListComponent } from './tasks-list.component';
 import { TasksService } from './tasks.service';
@@ -41,7 +43,7 @@ describe('TasksListComponent', () => {
     tasksService = fixture.debugElement.injector.get(TasksService);
 
     // Setup spy on the `getAll` method
-    spyOn(tasksService, 'getAll').and.returnValue(Promise.resolve([TASK_1, TASK_2]));
+    spyOn(tasksService, 'getAll').and.returnValue(Observable.of([TASK_1, TASK_2]));
 
     // query for the list-group by CSS element selector
     taskListDe = fixture.debugElement.query(By.css('div.list-group'));

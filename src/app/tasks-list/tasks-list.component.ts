@@ -18,7 +18,7 @@ export class TasksListComponent implements OnInit {
   ngOnInit() {
     this.tasksService
       .getAll()
-      .then(tasks => this.tasks = tasks);
+      .subscribe(tasks => this.tasks = tasks);
   }
 
   addTask(name: string): Promise<number> {

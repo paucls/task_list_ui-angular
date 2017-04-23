@@ -54,7 +54,7 @@ describe('TasksService', () => {
         connection.mockRespond(new Response(options));
       });
 
-      tasksService.getAll().then(tasks => {
+      tasksService.getAll().subscribe(tasks => {
         result = tasks;
       });
       tick();

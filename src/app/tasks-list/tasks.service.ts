@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
 import { Task } from './task';
@@ -12,10 +15,9 @@ export class TasksService {
 
   constructor(private http: Http) {}
 
-  getAll(): Promise<Task[]> {
+  getAll(): Observable<Task[]> {
     return this.http.get(this.tasksUrl)
-      .toPromise()
-      .then(response => response.json() as Task[])
+      .map(response => response.json() as Task[])
       .catch(this.handleError);
   }
 
@@ -44,7 +46,7 @@ export class TasksService {
       .catch(this.handleError);
   }
 
-  private handleError(error: any): Promise<any> {
+  private handleError(error: Response | any): Promise<any> {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);
   }
