@@ -77,7 +77,7 @@ describe('TasksService', () => {
         connection.mockRespond(new Response(options));
       });
 
-      tasksService.save(newTask).then(task => {
+      tasksService.save(newTask).subscribe(task => {
         result = task;
       });
       tick();

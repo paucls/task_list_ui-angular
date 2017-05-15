@@ -29,12 +29,11 @@ export class TasksService {
       .catch(this.handleError);
   }
 
-  save(task: Task): Promise<Task> {
+  save(task: Task): Observable<Task> {
     const url = `${this.tasksUrl}`;
 
     return this.http.post(url, JSON.stringify(task), {headers: this.headers})
-      .toPromise()
-      .then(response => response.json() as Task)
+      .map(response => response.json() as Task)
       .catch(this.handleError);
   }
 

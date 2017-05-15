@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
 import { TasksService } from './tasks.service';
 import { Task } from './task';
 
@@ -21,7 +23,7 @@ export class TasksListComponent implements OnInit {
       .subscribe(tasks => this.tasks = tasks);
   }
 
-  addTask(name: string): Promise<number> {
+  addTask(name: string): Observable<number> {
     name = name.trim();
     if (!name) {
       return;
@@ -31,7 +33,7 @@ export class TasksListComponent implements OnInit {
 
     return this.tasksService
       .save(newTask)
-      .then(task => this.tasks.push(task));
+      .subscribe(task => this.tasks.push(task));
   }
 
   deleteTask(deletedTask: Task) {

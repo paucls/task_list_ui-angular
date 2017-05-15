@@ -67,7 +67,7 @@ describe('TasksListComponent', () => {
     let taskName = 'Task Name';
 
     it('should call service to save the new task', () => {
-      spyOn(tasksService, 'save').and.returnValue(Promise.resolve());
+      spyOn(tasksService, 'save').and.returnValue(Observable.of());
 
       component.addTask(taskName);
 
@@ -75,7 +75,7 @@ describe('TasksListComponent', () => {
     });
 
     it('should add created task to the list of tasks', fakeAsync(() => {
-      spyOn(tasksService, 'save').and.returnValue(Promise.resolve(TASK_1));
+      spyOn(tasksService, 'save').and.returnValue(Observable.of(TASK_1));
 
       component.addTask(taskName);
       tick();
