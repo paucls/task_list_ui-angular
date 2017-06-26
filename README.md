@@ -1,4 +1,4 @@
-# Task List UI - Angular2
+# Task List UI - Angular
 [![Build Status](https://travis-ci.org/paucls/task_list_ui-angular2.svg?branch=master)](https://travis-ci.org/paucls/task_list_ui-angular2)
 
 A Tasks List web app for a [Task List REST API service](https://github.com/paucls/task_list_api-spring_boot).
