@@ -3,7 +3,7 @@
 
 A Tasks List web app for a [Task List REST API service](https://github.com/paucls/task_list_api-spring_boot).
 
-This is a simple pet project application that shows how to implement Angular 2 apps with unit tests, e2e tests against 
+This is a simple pet project application that shows how to implement Angular 4 apps with unit tests, e2e tests against 
 a stub backend, configuration for deployment in Heroku, etc.
 
 This project was scaffolded with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.20-4.
@@ -26,6 +26,7 @@ Before running the tests make sure you are serving the app via `ng serve`.
 
 ## Demo
 https://paucls-task-list-ui.herokuapp.com/
+![Demo](app-demo.gif)
 
 ## Version History
 - 1.0.1 - Updated Angular to version 4.1.2, it fixes bug with MockBackend and the production build. Using again build with AOT.
