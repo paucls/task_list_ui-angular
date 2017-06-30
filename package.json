@@ -9,10 +9,9 @@
     "start": "http-server dist/ -P $API_BASE_URL",
     "start:dev": "ng serve",
     "start:dev-proxy": "ng serve --environment=dev-proxy --proxy-config proxy.conf.json",
-    "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test --watch false",
-    "pree2e": "webdriver-manager update",
-    "e2e": "protractor"
+    "lint": "ng lint",
+    "e2e": "ng e2e --webdriver-update true"
   },
   "private": true,
   "dependencies": {
