@@ -1,6 +1,6 @@
 {
-  "name": "task-list-ui-angular2",
-  "version": "1.0.1",
+  "name": "task-list-ui-angular",
+  "version": "1.1.0",
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
@@ -9,7 +9,8 @@
     "start": "http-server dist/ -P $API_BASE_URL",
     "start:dev": "ng serve",
     "start:dev-proxy": "ng serve --environment=dev-proxy --proxy-config proxy.conf.json",
-    "test": "ng test --watch false",
+    "test": "ng test --single-run --code-coverage",
+    "test:watch": "ng test --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e --webdriver-update true"
   },
