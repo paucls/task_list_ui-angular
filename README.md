@@ -1,5 +1,5 @@
 # Task List UI - Angular
-[![Build Status](https://travis-ci.org/paucls/task_list_ui-angular2.svg?branch=master)](https://travis-ci.org/paucls/task_list_ui-angular2)
+[![Build Status](https://travis-ci.org/paucls/task_list_ui-angular.svg?branch=master)](https://travis-ci.org/paucls/task_list_ui-angular)
 
 A Tasks List web app for a [Task List REST API service](https://github.com/paucls/task_list_api-spring_boot).
 
@@ -29,6 +29,7 @@ https://paucls-task-list-ui.herokuapp.com/
 ![Demo](app-demo.gif)
 
 ## Version History
+- 1.1.0 - Added code coverage to unit tests.
 - 1.0.1 - Updated Angular to version 4.1.2, it fixes bug with MockBackend and the production build. Using again build with AOT.
 - 1.0.0 - Updated Angular to version 4.0.0 as part of updating to Angular CLI 1.0.0. (As drawback this versions disables aot on production build, this is related to bug with Angular 4 and MockService https://github.com/angular/angular/issues/15521).
 - 0.0.0 - Implemented completely the project, used Angular 2 and Angular CLI 1.0.0-beta.20-4.
