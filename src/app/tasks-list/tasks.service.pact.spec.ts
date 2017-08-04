@@ -41,11 +41,33 @@ describe('TasksService', () => {
     provider.verify().then(done, e => done.fail(e));
   });
 
+  describe('delete()', () => {
+
+    it('should call the API to delete the task', (done) => {
+
+      provider.addInteraction({
+        given: 'a task with task-id exists',
+        uponReceiving: 'a request to delete that tasks',
+        withRequest: {
+          method: 'DELETE',
+          path: '/tasks/task-id'
+        },
+        willRespondWith: {
+          status: 204
+        }
+      });
+
+      tasksService.delete('task-id').then(done);
+
+    });
+
+  });
+
   describe('getAll()', () => {
 
     it('should return all tasks from API', (done) => {
 
-      const TASKS: Task[] = [{
+      const tasks: Task[] = [{
         id: 'an id',
         name: 'a name',
         done: false,
@@ -72,7 +94,7 @@ describe('TasksService', () => {
       });
 
       tasksService.getAll().then(tasks => {
-        expect(tasks).toEqual(TASKS);
+        expect(tasks).toEqual(tasks);
         done()
       });
 
