@@ -17,8 +17,8 @@ describe('TasksService', () => {
       web: true
     });
 
-    // required for slower Travis CI environment
-    setTimeout(function () { done() }, jasmine.DEFAULT_TIMEOUT_INTERVAL - 1000); // needs to be less than jasmine timeout
+    // required for slower CI environments
+    setTimeout(done, 200);
 
     // Required if run with `singleRun: false`
     provider.removeInteractions();
@@ -43,8 +43,7 @@ describe('TasksService', () => {
 
   describe('delete()', () => {
 
-    it('should call the API to delete the task', (done) => {
-
+    beforeAll((done) => {
       provider.addInteraction({
         given: 'a task with task-id exists',
         uponReceiving: 'a request to delete that tasks',
@@ -55,7 +54,10 @@ describe('TasksService', () => {
         willRespondWith: {
           status: 204
         }
-      });
+      }).then(done, e => done.fail(e));
+    });
+
+    it('should call the API to delete the task', (done) => {
 
       tasksService.delete('task-id').then(done);
 
@@ -65,15 +67,7 @@ describe('TasksService', () => {
 
   describe('getAll()', () => {
 
-    it('should return all tasks from API', (done) => {
-
-      const tasks: Task[] = [{
-        id: 'an id',
-        name: 'a name',
-        done: false,
-        userId: 'an user id'
-      }];
-
+    beforeAll((done) => {
       provider.addInteraction({
         given: 'tasks exists',
         uponReceiving: 'a request to get tasks',
@@ -91,7 +85,17 @@ describe('TasksService', () => {
             userId: Pact.Matchers.somethingLike('an user id')
           }]
         }
-      });
+      }).then(done, e => done.fail(e));
+    });
+
+    it('should return all tasks from API', (done) => {
+
+      const tasks: Task[] = [{
+        id: 'an id',
+        name: 'a name',
+        done: false,
+        userId: 'an user id'
+      }];
 
       tasksService.getAll().then(tasks => {
         expect(tasks).toEqual(tasks);
