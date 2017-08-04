@@ -4,12 +4,13 @@
 module.exports = function (config) {
   config.set({
     basePath: '',
-    frameworks: ['jasmine', '@angular/cli'],
+    frameworks: ['jasmine', '@angular/cli', 'pact'],
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
+      require('karma-pact'),
       require('@angular/cli/plugins/karma')
     ],
     client:{
@@ -35,6 +36,10 @@ module.exports = function (config) {
               ? ['progress', 'coverage-istanbul']
               : ['progress', 'kjhtml'],
     port: 9876,
+    pact: {cors: true, port: 1234},
+    proxies: {
+      '/tasks': 'http://localhost:1234/tasks'
+    },
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
