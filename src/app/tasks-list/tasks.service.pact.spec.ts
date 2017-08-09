@@ -46,7 +46,7 @@ describe('TasksService', () => {
     beforeAll((done) => {
       provider.addInteraction({
         given: 'a task with task-id exists',
-        uponReceiving: 'a request to delete that tasks',
+        uponReceiving: 'a request to delete task with task-id',
         withRequest: {
           method: 'DELETE',
           path: '/tasks/task-id'
@@ -58,9 +58,7 @@ describe('TasksService', () => {
     });
 
     it('should call the API to delete the task', (done) => {
-
       tasksService.delete('task-id').then(done);
-
     });
 
   });
