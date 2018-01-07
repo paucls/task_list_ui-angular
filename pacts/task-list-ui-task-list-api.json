@@ -1,0 +1,65 @@
+{
+  "consumer": {
+    "name": "task-list-ui"
+  },
+  "provider": {
+    "name": "task-list-api"
+  },
+  "interactions": [
+    {
+      "description": "a request to delete task with task-id",
+      "providerState": "a task with task-id exists",
+      "request": {
+        "method": "DELETE",
+        "path": "/tasks/task-id"
+      },
+      "response": {
+        "status": 204,
+        "headers": {
+
+        }
+      }
+    },
+    {
+      "description": "a request to get tasks",
+      "providerState": "tasks exists",
+      "request": {
+        "method": "GET",
+        "path": "/tasks"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": [
+          {
+            "id": "an id",
+            "name": "a name",
+            "done": false,
+            "userId": "an user id"
+          }
+        ],
+        "matchingRules": {
+          "$.body[0].id": {
+            "match": "type"
+          },
+          "$.body[0].name": {
+            "match": "type"
+          },
+          "$.body[0].done": {
+            "match": "type"
+          },
+          "$.body[0].userId": {
+            "match": "type"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}

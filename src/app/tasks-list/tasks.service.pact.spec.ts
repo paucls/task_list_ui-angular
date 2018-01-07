@@ -12,8 +12,8 @@ describe('TasksService', () => {
 
   beforeAll((done) => {
     provider = Pact({
-      consumer: 'titan-ui2-sample-app',
-      provider: 'titan-release-toggling',
+      consumer: 'task-list-ui',
+      provider: 'task-list-api',
       web: true
     });
 
@@ -45,8 +45,8 @@ describe('TasksService', () => {
 
     beforeAll((done) => {
       provider.addInteraction({
-        given: 'a task with task-id exists',
-        uponReceiving: 'a request to delete task with task-id',
+        state: 'a task with id task-id exists',
+        uponReceiving: 'a request to delete task task-id',
         withRequest: {
           method: 'DELETE',
           path: '/tasks/task-id'
@@ -67,7 +67,7 @@ describe('TasksService', () => {
 
     beforeAll((done) => {
       provider.addInteraction({
-        given: 'tasks exists',
+        state: 'tasks exists',
         uponReceiving: 'a request to get tasks',
         withRequest: {
           method: 'GET',
@@ -87,7 +87,6 @@ describe('TasksService', () => {
     });
 
     it('should return all tasks from API', (done) => {
-
       const tasks: Task[] = [{
         id: 'an id',
         name: 'a name',
@@ -95,11 +94,10 @@ describe('TasksService', () => {
         userId: 'an user id'
       }];
 
-      tasksService.getAll().then(tasks => {
-        expect(tasks).toEqual(tasks);
-        done()
+      tasksService.getAll().then(response => {
+        expect(response).toEqual(tasks);
+        done();
       });
-
     });
 
   });

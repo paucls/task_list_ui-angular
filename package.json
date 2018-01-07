@@ -48,9 +48,9 @@
     "karma-coverage-istanbul-reporter": "^0.2.0",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "karma-pact": "0.0.7",
-    "pact": "^2.6.0",
-    "pact-web": "^2.6.0",
+    "@pact-foundation/karma-pact": "^1.0.0",
+    "pact": "^2.7.0",
+    "pact-web": "^2.7.0",
     "protractor": "~5.1.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0"

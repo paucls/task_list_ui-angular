@@ -10,7 +10,7 @@ module.exports = function (config) {
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
-      require('karma-pact'),
+      require('@pact-foundation/karma-pact'),
       require('@angular/cli/plugins/karma')
     ],
     client:{
@@ -36,7 +36,9 @@ module.exports = function (config) {
               ? ['progress', 'coverage-istanbul']
               : ['progress', 'kjhtml'],
     port: 9876,
-    pact: {cors: true, port: 1234},
+    pact: [{
+      cors: true, spec: 2, port: 1234, dir: 'pacts/'
+    }],
     proxies: {
       '/tasks': 'http://localhost:1234/tasks'
     },
