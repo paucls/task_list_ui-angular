@@ -7,8 +7,8 @@
   },
   "interactions": [
     {
-      "description": "a request to delete task with task-id",
-      "providerState": "a task with task-id exists",
+      "description": "a request to delete task task-id",
+      "providerState": "a task with id task-id exists",
       "request": {
         "method": "DELETE",
         "path": "/tasks/task-id"

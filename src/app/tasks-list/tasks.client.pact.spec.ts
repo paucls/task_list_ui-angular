@@ -2,13 +2,13 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
 import * as Pact from 'pact-web';
 
-import { TasksService } from './tasks.service';
+import { TasksClient } from './tasks.client';
 import { Task } from './task';
 
-describe('TasksService', () => {
+describe('TasksClient', () => {
 
   let provider;
-  let tasksService;
+  let tasksClient;
 
   beforeAll((done) => {
     provider = Pact({
@@ -30,18 +30,18 @@ describe('TasksService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [TasksService],
+      providers: [TasksClient],
       imports: [HttpModule]
     });
 
-    tasksService = getTestBed().get(TasksService);
+    tasksClient = getTestBed().get(TasksClient);
   });
 
   afterEach((done) => {
     provider.verify().then(done, e => done.fail(e));
   });
 
-  describe('delete()', () => {
+  describe('Delete Task', () => {
 
     beforeAll((done) => {
       provider.addInteraction({
@@ -58,12 +58,12 @@ describe('TasksService', () => {
     });
 
     it('should call the API to delete the task', (done) => {
-      tasksService.delete('task-id').then(done);
+      tasksClient.delete('task-id').then(done);
     });
 
   });
 
-  describe('getAll()', () => {
+  describe('Get all Tasks', () => {
 
     beforeAll((done) => {
       provider.addInteraction({
@@ -94,7 +94,7 @@ describe('TasksService', () => {
         userId: 'an user id'
       }];
 
-      tasksService.getAll().then(response => {
+      tasksClient.getAll().then(response => {
         expect(response).toEqual(tasks);
         done();
       });

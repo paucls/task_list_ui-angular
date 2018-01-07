@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { TasksService } from './tasks.service';
+import { TasksClient } from './tasks.client';
 import { Task } from './task';
 
 @Component({
   selector: 'app-tasks-list',
   templateUrl: './tasks-list.component.html',
   styleUrls: ['./tasks-list.component.css'],
-  providers: [TasksService]
+  providers: [TasksClient]
 })
 export class TasksListComponent implements OnInit {
 
   tasks: Task[] = [];
 
-  constructor(private tasksService: TasksService) {
+  constructor(private tasksClient: TasksClient) {
   }
 
   ngOnInit() {
-    this.tasksService
+    this.tasksClient
       .getAll()
       .then(tasks => this.tasks = tasks);
   }
@@ -29,7 +29,7 @@ export class TasksListComponent implements OnInit {
 
     let newTask: Task = {name: name};
 
-    return this.tasksService
+    return this.tasksClient
       .save(newTask)
       .then(task => this.tasks.push(task));
   }

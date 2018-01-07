@@ -5,7 +5,7 @@ import { Http } from '@angular/http';
 
 import { TaskDetailComponent } from './task-detail.component';
 import { Task } from '../task';
-import { TasksService } from '../tasks.service';
+import { TasksClient } from '../tasks.client';
 
 describe('TaskDetailComponent', () => {
 
@@ -15,13 +15,13 @@ describe('TaskDetailComponent', () => {
   let fixture: ComponentFixture<TaskDetailComponent>;
   let taskDetailDe: DebugElement;
   let taskDetailEl: HTMLElement;
-  let tasksService: TasksService;
+  let tasksClient: TasksClient;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [TaskDetailComponent],
       providers: [
-        TasksService,
+        TasksClient,
         {provide: Http, useClass: class HttpStub {}}
       ]
     }).compileComponents();
@@ -32,7 +32,7 @@ describe('TaskDetailComponent', () => {
     component = fixture.componentInstance;
 
     // TasksService from the root injector
-    tasksService = fixture.debugElement.injector.get(TasksService);
+    tasksClient = fixture.debugElement.injector.get(TasksClient);
 
     // query for the list element by CSS element selector
     taskDetailDe = fixture.debugElement.query(By.css('.list-group-item'));
@@ -82,13 +82,13 @@ describe('TaskDetailComponent', () => {
   describe('deleteTask()', () => {
 
     beforeEach(() => {
-      spyOn(tasksService, 'delete').and.returnValue(Promise.resolve());
+      spyOn(tasksClient, 'delete').and.returnValue(Promise.resolve());
     });
 
     it('should call the service to delete the task', () => {
       component.deleteTask(TASK);
 
-      expect(tasksService.delete).toHaveBeenCalledWith(TASK.id);
+      expect(tasksClient.delete).toHaveBeenCalledWith(TASK.id);
     });
 
     it('should raise task deleted event when delete successes', fakeAsync(() => {
@@ -106,7 +106,7 @@ describe('TaskDetailComponent', () => {
   describe('toggleTaskStatus()', () => {
 
     beforeEach(() => {
-      spyOn(tasksService, 'update').and.returnValue(Promise.resolve());
+      spyOn(tasksClient, 'update').and.returnValue(Promise.resolve());
     });
 
     it('should set an undone task as done', () => {
@@ -131,7 +131,7 @@ describe('TaskDetailComponent', () => {
 
       component.toggleTaskStatus(task);
 
-      expect(tasksService.update).toHaveBeenCalledWith(expectedToggledTask);
+      expect(tasksClient.update).toHaveBeenCalledWith(expectedToggledTask);
     });
 
     it('should indicate when operation is processing', () => {

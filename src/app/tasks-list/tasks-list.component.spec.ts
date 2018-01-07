@@ -5,7 +5,7 @@ import { DebugElement } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { TasksListComponent } from './tasks-list.component';
-import { TasksService } from './tasks.service';
+import { TasksClient } from './tasks.client';
 import { Task } from './task';
 import { TaskDetailComponent } from './task-detail/task-detail.component';
 
@@ -18,7 +18,7 @@ describe('TasksListComponent', () => {
   let fixture: ComponentFixture<TasksListComponent>;
   let taskListDe: DebugElement;
   let taskListEl: HTMLElement;
-  let tasksService: TasksService;
+  let tasksClient: TasksClient;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -27,7 +27,7 @@ describe('TasksListComponent', () => {
         TaskDetailComponent
       ],
       providers: [
-        TasksService,
+        TasksClient,
         {provide: Http, useClass: class HttpStub {}}
       ]
     }).compileComponents();
@@ -38,10 +38,10 @@ describe('TasksListComponent', () => {
     component = fixture.componentInstance;
 
     // TasksService from the root injector
-    tasksService = fixture.debugElement.injector.get(TasksService);
+    tasksClient = fixture.debugElement.injector.get(TasksClient);
 
     // Setup spy on the `getAll` method
-    spyOn(tasksService, 'getAll').and.returnValue(Promise.resolve([TASK_1, TASK_2]));
+    spyOn(tasksClient, 'getAll').and.returnValue(Promise.resolve([TASK_1, TASK_2]));
 
     // query for the list-group by CSS element selector
     taskListDe = fixture.debugElement.query(By.css('div.list-group'));
@@ -54,7 +54,7 @@ describe('TasksListComponent', () => {
     fixture.detectChanges(); // update view with tasks
 
     let taskDetailDe = taskListDe.queryAll(By.css('app-task-detail'));
-    expect(tasksService.getAll).toHaveBeenCalled();
+    expect(tasksClient.getAll).toHaveBeenCalled();
     expect(taskDetailDe.length).toBe(2);
     expect(taskDetailDe[0].nativeElement.textContent).toContain(TASK_1.name);
     expect(taskDetailDe[1].nativeElement.textContent).toContain(TASK_2.name);
@@ -65,15 +65,15 @@ describe('TasksListComponent', () => {
     let taskName = 'Task Name';
 
     it('should call service to save the new task', () => {
-      spyOn(tasksService, 'save').and.returnValue(Promise.resolve());
+      spyOn(tasksClient, 'save').and.returnValue(Promise.resolve());
 
       component.addTask(taskName);
 
-      expect(tasksService.save).toHaveBeenCalledWith({name: taskName});
+      expect(tasksClient.save).toHaveBeenCalledWith({name: taskName});
     });
 
     it('should add created task to the list of tasks', fakeAsync(() => {
-      spyOn(tasksService, 'save').and.returnValue(Promise.resolve(TASK_1));
+      spyOn(tasksClient, 'save').and.returnValue(Promise.resolve(TASK_1));
 
       component.addTask(taskName);
       tick();
@@ -83,11 +83,11 @@ describe('TasksListComponent', () => {
     }));
 
     it('should do nothing if task name is blank', () => {
-      spyOn(tasksService, 'save');
+      spyOn(tasksClient, 'save');
 
       component.addTask(' ');
 
-      expect(tasksService.save).not.toHaveBeenCalled();
+      expect(tasksClient.save).not.toHaveBeenCalled();
     });
 
   });

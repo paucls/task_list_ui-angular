@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Task } from '../task';
-import { TasksService } from '../tasks.service';
+import { TasksClient } from '../tasks.client';
 
 @Component({
   selector: 'app-task-detail',
@@ -14,10 +14,10 @@ export class TaskDetailComponent {
   @Output() taskDeleted = new EventEmitter<Task>();
   processing: boolean = false;
 
-  constructor(private tasksService: TasksService) {}
+  constructor(private tasksClient: TasksClient) {}
 
   deleteTask(task: Task) {
-    this.tasksService
+    this.tasksClient
       .delete(task.id)
       .then(() => this.taskDeleted.emit(this.task));
   }
@@ -27,7 +27,7 @@ export class TaskDetailComponent {
 
     task.done = !task.done;
 
-    return this.tasksService
+    return this.tasksClient
       .update(task)
       .then(() => this.processing = false);
   }
