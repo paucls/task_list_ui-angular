@@ -8,7 +8,7 @@ import { Task } from './task';
 describe('TasksClient', () => {
 
   let provider;
-  let tasksClient;
+  let tasksClient: TasksClient;
 
   beforeAll((done) => {
     provider = Pact({
@@ -39,6 +39,47 @@ describe('TasksClient', () => {
 
   afterEach((done) => {
     provider.verify().then(done, e => done.fail(e));
+  });
+
+  describe('Save Task', () => {
+
+    const unsavedTaskBody = {
+      name: Pact.Matchers.somethingLike('a name'),
+      done: Pact.Matchers.somethingLike(false),
+      userId: Pact.Matchers.somethingLike('an user id')
+    };
+    const savedTaskBody = {...unsavedTaskBody, id: Pact.Matchers.somethingLike('task-id')};
+
+    beforeAll((done) => {
+      provider.addInteraction({
+        state: 'a task with id task-id does not exist',
+        uponReceiving: 'a request to create task task-id',
+        withRequest: {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          path: '/tasks',
+          body: unsavedTaskBody
+        },
+        willRespondWith: {
+          status: 201,
+          body: savedTaskBody
+        }
+      }).then(done, e => done.fail(e));
+    });
+
+    it('should return saved task from API', (done) => {
+      const task = {
+        name: 'a name',
+        done: false,
+        userId: 'an user id'
+      };
+
+      tasksClient.save(task).then(response => {
+        expect(response).toEqual({...task, id: 'task-id'});
+        done();
+      });
+    });
+
   });
 
   describe('Delete Task', () => {

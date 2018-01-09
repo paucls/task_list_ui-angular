@@ -7,6 +7,59 @@
   },
   "interactions": [
     {
+      "description": "a request to create task task-id",
+      "providerState": "a task with id task-id does not exist",
+      "request": {
+        "method": "POST",
+        "path": "/tasks",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "name": "a name",
+          "done": false,
+          "userId": "an user id"
+        },
+        "matchingRules": {
+          "$.body.name": {
+            "match": "type"
+          },
+          "$.body.done": {
+            "match": "type"
+          },
+          "$.body.userId": {
+            "match": "type"
+          }
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+
+        },
+        "body": {
+          "name": "a name",
+          "done": false,
+          "userId": "an user id",
+          "id": "task-id"
+        },
+        "matchingRules": {
+          "$.body.name": {
+            "match": "type"
+          },
+          "$.body.done": {
+            "match": "type"
+          },
+          "$.body.userId": {
+            "match": "type"
+          },
+          "$.body.id": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
       "description": "a request to delete task task-id",
       "providerState": "a task with id task-id exists",
       "request": {
