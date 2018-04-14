@@ -51,7 +51,7 @@ describe('TaskDetailComponent', () => {
     component.task.done = true;
     fixture.detectChanges();
 
-    let isCheckIconPresent = taskDetailDe.queryAll(By.css('.task-check > .fa-check-square-o')).length > 0;
+    const isCheckIconPresent = taskDetailDe.queryAll(By.css('.task-check > .fa-check-square-o')).length > 0;
     expect(isCheckIconPresent).toBe(true);
   });
 
@@ -59,7 +59,7 @@ describe('TaskDetailComponent', () => {
     component.task.done = false;
     fixture.detectChanges();
 
-    let isOkIconPresent = taskDetailDe.queryAll(By.css('.task-check > .fa-check-square-o')).length > 0;
+    const isOkIconPresent = taskDetailDe.queryAll(By.css('.task-check > .fa-check-square-o')).length > 0;
     expect(isOkIconPresent).toBe(false);
   });
 
@@ -67,7 +67,7 @@ describe('TaskDetailComponent', () => {
     component.task.done = false;
     fixture.detectChanges();
 
-    let isUncheckedIconPresent = taskDetailDe.queryAll(By.css('.task-check > .fa-square-o')).length > 0;
+    const isUncheckedIconPresent = taskDetailDe.queryAll(By.css('.task-check > .fa-square-o')).length > 0;
     expect(isUncheckedIconPresent).toBe(true);
   });
 
@@ -75,7 +75,7 @@ describe('TaskDetailComponent', () => {
     component.task.done = true;
     fixture.detectChanges();
 
-    let isUncheckedIconPresent = taskDetailDe.queryAll(By.css('.task-check > .fa-square-o')).length > 0;
+    const isUncheckedIconPresent = taskDetailDe.queryAll(By.css('.task-check > .fa-square-o')).length > 0;
     expect(isUncheckedIconPresent).toBe(false);
   });
 
@@ -118,7 +118,7 @@ describe('TaskDetailComponent', () => {
     });
 
     it('should set a done task as undone', () => {
-      let task: Task = {name: 'Done task', done: true};
+      const task: Task = {name: 'Done task', done: true};
 
       component.toggleTaskStatus(task);
 
@@ -126,8 +126,8 @@ describe('TaskDetailComponent', () => {
     });
 
     it('should call the service to update task', () => {
-      let task: Task = {name: 'Task', done: false};
-      let expectedToggledTask: Task = {name: 'Task', done: true};
+      const task: Task = {name: 'Task', done: false};
+      const expectedToggledTask: Task = {name: 'Task', done: true};
 
       component.toggleTaskStatus(task);
 
@@ -135,7 +135,7 @@ describe('TaskDetailComponent', () => {
     });
 
     it('should indicate when operation is processing', () => {
-      let task: Task = {name: 'Undone task', done: false};
+      const task: Task = {name: 'Undone task', done: false};
 
       expect(component.processing).toBe(false);
 

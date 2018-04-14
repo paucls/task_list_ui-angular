@@ -12,7 +12,7 @@ export class TaskDetailComponent {
 
   @Input() task: Task;
   @Output() taskDeleted = new EventEmitter<Task>();
-  processing: boolean = false;
+  processing = false;
 
   constructor(private tasksService: TasksService) {}
 
