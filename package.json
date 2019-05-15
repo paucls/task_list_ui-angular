@@ -28,6 +28,7 @@
     "bootswatch": "3.3.7",
     "core-js": "^2.4.1",
     "jquery": "3.1.1",
+    "es6-promise": "~4.2.6",
     "font-awesome": "4.7.0",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4",
@@ -49,8 +50,8 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "@pact-foundation/karma-pact": "^1.0.0",
-    "pact": "^2.7.0",
-    "pact-web": "^2.7.0",
+    "@pact-foundation/pact": "5.9.1",
+    "@pact-foundation/pact-web": "5.9.1",
     "protractor": "~5.1.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0"

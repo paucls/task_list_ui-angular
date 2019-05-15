@@ -1,6 +1,6 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
-import * as Pact from 'pact-web';
+import { PactWeb, Matchers } from '@pact-foundation/pact/pact-web';
 
 import { TasksClient } from './tasks.client';
 import { Task } from './task';
@@ -11,10 +11,9 @@ describe('TasksClient', () => {
   let tasksClient: TasksClient;
 
   beforeAll((done) => {
-    provider = Pact({
+    provider = new PactWeb({
       consumer: 'task-list-ui',
-      provider: 'task-list-api',
-      web: true
+      provider: 'task-list-api'
     });
 
     // required for slower CI environments
@@ -44,11 +43,11 @@ describe('TasksClient', () => {
   describe('Save Task', () => {
 
     const unsavedTaskBody = {
-      name: Pact.Matchers.somethingLike('a name'),
-      done: Pact.Matchers.somethingLike(false),
-      userId: Pact.Matchers.somethingLike('an user id')
+      name: Matchers.somethingLike('a name'),
+      done: Matchers.somethingLike(false),
+      userId: Matchers.somethingLike('an user id')
     };
-    const savedTaskBody = {...unsavedTaskBody, id: Pact.Matchers.somethingLike('task-id')};
+    const savedTaskBody = {...unsavedTaskBody, id: Matchers.somethingLike('task-id')};
 
     beforeAll((done) => {
       provider.addInteraction({
@@ -118,10 +117,10 @@ describe('TasksClient', () => {
           status: 200,
           headers: {'Content-Type': 'application/json'},
           body: [{
-            id: Pact.Matchers.somethingLike('an id'),
-            name: Pact.Matchers.somethingLike('a name'),
-            done: Pact.Matchers.somethingLike(false),
-            userId: Pact.Matchers.somethingLike('an user id')
+            id: Matchers.somethingLike('an id'),
+            name: Matchers.somethingLike('a name'),
+            done: Matchers.somethingLike(false),
+            userId: Matchers.somethingLike('an user id')
           }]
         }
       }).then(done, e => done.fail(e));
